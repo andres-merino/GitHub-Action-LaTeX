@@ -1,23 +1,25 @@
 \documentclass[10pt,respuestas,a4]{aleph-examen}
 % \documentclass[10pt,a4]{aleph-examen}
 
-% -- Paquetes extra
-\usepackage{aleph-comandos}
-\usepackage{tkz-tab}
-\usepackage{pstricks,pst-plot,pst-bezier}
-        \psset{showorigin=false}
+% -- Paquetes adicionales
 \usepackage{multicol}
+\usepackage{aleph-comandos}
 
-% -- Datos del examen
-\universidad{Escuela de Ciencias Físicas y Matemática}
-\autor{Mat. Andrés Merino}
-\materia{Cálculo diferencia e integral}
-\examen{Examen no. 01}
-\fecha{Semestre 2020-1}
+% -- Datos 
+\institucion{Proyecto Alephsub0}
+% \carrera{Ciencia de Datos}
+\asignatura{Funciones}
+\tema{Resumen 1}
+\autor[A. Merino]{Andrés Merino}
+\fecha{Semestre 2024-1}
 
-\logouno[3cm]{Logos/logoPUCE_01_c}
-\definecolor{colortext}{HTML}{008DA3}
+\logouno[0.3\textwidth]{Logos/LogoAlephsub0-02.png}
+\definecolor{colortext}{HTML}{0030A1}
+\definecolor{colordef}{HTML}{0030A1}
+\fuente{montserrat}
 
+
+% -- Comandos adicionales
 
 
 \begin{document}
@@ -59,9 +61,9 @@
             & \,\qImp (\sqrt{8 - 2x})^2 = (2 - x)^2\\
             & \qDimp 8 - 2x = 4 - 4x + x^2\\
             & \qDimp x^2 - 2x - 4 = 0\\
-            & \qDimp x = 1-\sqrt{5} \qlor x = 1+\sqrt{5}\qedhere
+            & \qDimp x = 1-\sqrt{5} \qlor x = 1+\sqrt{5}
         \end{align*}
-        Ahora, reemplazando en la ecuación original, podemos comprobar que la única solución es $x = 1-\sqrt{5}$.
+        Ahora, reemplazando en la ecuación original, podemos comprobar que la única solución es $x = 1-\sqrt{5}$.\qedhere
     \end{enumerate}
 \end{respuesta}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -94,275 +96,8 @@
     \paragraph{Respuesta:} Deben solicitarse un monto de \$$270\,588.23$, aproximadamente.
 \end{respuesta}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item
-    Resolver la siguiente inecuación:\puntaje{2.0}
-    \[
-        \frac{3}{6-2x}\leq \frac{2x}{2+x}.
-    \]
-
-\begin{respuesta}
-    Para resolver la inecuación, primero debemos dejar todos los términos en un solo lado de la inecuación y luego separarla en factores:
-    \begin{align*}
-       \frac{3}{6-2x}\leq \frac{2x}{2+x}
-       &\qDimp \frac{3}{6-2x} - \frac{2x}{2+x} \leq 0 \\
-       &\qDimp \frac{3(2+x)-2x(6-2x)}{(6-2x)(2+x)} \leq 0\\
-       &\qDimp \frac{4 x^2 - 9 x + 6}{(6-2x)(2+x)} \leq 0.
-    \end{align*}
-    Con esto, realizamos la tabla de factores:
-    \begin{center}\small
-    \begin{tabular}{c|c|c|c|c|c}
-        & $\l]-\infty,-2\r[$ & $-2$ & $\l]-2,3\r[$ & $3$ &$\l]3,+\infty\r[$\\
-        \hline
-        $4 x^2 - 9 x + 6$ & $+$ & $+$ & $+$ & $+$ & $+$\\
-        $2 +x$ & $-$ & $0$ & $+$ & $+$ & $+$\\
-        $6-2x$ & $+$ & $+$ & $+$ & $0$ & $-$\\
-        \hline
-        & $-$ & $\nexists$ & $+$  & $\nexists$ & -
-    \end{tabular}
-    \end{center}
-    Como buscamos los menores o iguales que $0$, tenemos que la solución es
-    \[
-        S = \l]-\infty,-2\r[ \cup \l]3,+\infty \r[.
-        \qedhere
-    \]
-\end{respuesta}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item
-    Considere las funciones
-    \[
-        \funcion{f}{\R}{\R}{x}{2 - 3x - x^2}
-        \texty
-        \funcion{g}{\R}{\R}{x}{\frac{2x}{x + 2},}
-    \]
-    determinar, para $x,h\in\R$ y $h\neq 0$,
-    \begin{multicols}{2}
-        \begin{enumerate}[label=\textit{\alph*)}]
-        \item 
-            $f(3)$\puntaje{0.3}
-        \item
-            $g(-2)$\puntaje{0.3}
-        \item
-            $f(1-x^2)$\puntaje{0.5}
-        \item
-            $(f\circ g)(x)$\puntaje{0.7}
-        \item
-            $(g\circ f)(x)$\puntaje{0.7}
-        \item
-            $\dfrac{f(x+h)-f(x)}{h}$\puntaje{1.0}
-        \item
-            $\dfrac{g(x+h)-g(x)}{h}$\puntaje{1.0}
-        \end{enumerate}    
-    \end{multicols}
-    
-\begin{respuesta}
-    \hspace{0pt}
-    \begin{enumerate}[label=\textit{\alph*)}]
-    \item 
-        $f(3) = 2 - 3(3) - (3)^2 = -16$
-    \item
-        $g(-2)$ no existe
-    \item
-        $f(1-x^2) = 2 - 3(1-x^2) - (1-x^2)^2 = -x^4 + 5 x^2 - 2$
-    \item
-        $\begin{aligned}[t]
-        (f\circ g)(x) 
-        & = f(g(x))\\
-        & = f\l(\frac{2x}{x + 2}\r)\\
-        & = 2 - 3\l(\frac{2x}{x + 2}\r) - \l(\frac{2x}{x + 2}\r)^2\\    
-        & = \frac{-8 x^2 - 4x + 8}{(x + 2)^2}
-        \end{aligned}$
-    \item
-        $\begin{aligned}[t]
-        (g\circ f)(x) 
-        & = g(f(x))\\
-        & = g(2 - 3x - x^2)\\
-        & = \frac{2(2 - 3x - x^2)}{(2 - 3x - x^2) + 2}\\
-        & = \frac{4 - 6x - 2x^2)}{4 - 3x - x^2}
-        \end{aligned}$
-    \item
-        $\begin{aligned}[t]
-        \dfrac{f(x+h)-f(x)}{h}
-        & = \dfrac{2 - 3(x+h) - (x+h)^2-(2 - 3x - x^2)}{h}\\
-        & = \dfrac{-h^2 - 2 xh - 3h}{h}\\
-        & = -h - 2 x - 3
-        \end{aligned}$
-    \item
-        $\begin{aligned}[t]
-        \dfrac{g(x+h)-g(x)}{h}
-        & = \dfrac{\frac{2(x+h)}{(x+h) + 2}- \frac{2x}{x + 2}}{h}\\
-        & = \dfrac{\dfrac{2(x+h)(x + 2)-2x(x+h + 2)}{(x+h + 2)(x + 2)}}{h}\\
-        & = \dfrac{\dfrac{4h}{(x+h + 2)(x + 2)}}{h}\\
-        & = \dfrac{4}{(x+h + 2)(x + 2)}
-        \end{aligned}$
-    \end{enumerate}    \qedhere
-\end{respuesta}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item
-    Considere la función $\func{f}{[-5,5]}{\R}$ cuya gráfica se muestra a continuación.
-    \begin{center}
-    \psset{algebraic,plotpoints=500}
-    \begin{pspicture}(-5.5,-3.5)(5.5,3.5)
-        \psgrid[gridcolor=gray,subgriddiv=0,griddots=5,gridlabels=0pt](-5,-3)(5,3)
-        \psaxes[labelFontSize=\scriptstyle,Dx=1,Dy=1]{->}(0,0)(-5.5,-3.5)(5.5,3.5)
-        
-        \psset{linewidth=1.5pt}
-        \psbcurve(-5,-1)(-4,-1.5)(-3,-3)
-        \psbcurve(-3,-3)(-2,-1.5)(-1,1)
-        \psline(-1,-2)(2,1)
-        \psline(2,1)(3,-1)
-        \psline(3,3)(5,2)
-        
-        \psdot*[dotsize=6pt](-1,1)
-        \psdot[dotsize=6pt,dotstyle=o](-1,-2)
-        
-        \psdot*[dotsize=6pt](3,3)
-        \psdot[dotsize=6pt,dotstyle=o](3,-1)
-    \end{pspicture}
-    \end{center}
-    \begin{enumerate}[label=\textit{\alph*)}]
-    \item
-        Determine los intervalos donde es estrictamente creciente.\puntaje{1.0}
-    \item
-        Determine los intervalos donde es estrictamente decreciente.\puntaje{1.0}
-    \item
-        Determine el valor de $f(-1)$, $f(0)$ y $f(1)$.\puntaje{0.5}
-    \item
-        Determine $\img(f)$.\puntaje{0.5}
-    \end{enumerate}
-
-\begin{respuesta}
-    \hspace{0pt}
-    \begin{enumerate}[label=\textit{\alph*)}]
-    \item
-        La función es estrictamente creciente en $[-3,-1]$ y $\l]-1,2\r]$.
-    \item
-        La función es estrictamente decreciente en $[-5,-3]$, $\l[2,3\r[$ y $\l[3,5\r]$.
-    \item
-        Tenemos que $f(-1) = 1$, $f(0) = -1$ y $f(1) = 0$.
-    \item
-        Tenemos que $\img(f) = [-3,1] \cup [2,3]$.\qedhere
-    \end{enumerate}
-\end{respuesta}
-    
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item
-    Dibuje una función $\func{f}{[-3,3]}{\R}$ tal que
-    \begin{itemize}
-    \item 
-        $f(-2)=3$, $f(-1)=-2$, $f(0)=2$, $f(3)=1$;\puntaje{0.8}
-    \item 
-        sea estricta creciente en $\l[-3,-2\r]$;\puntaje{0.4}
-    \item 
-        sea estricta decreciente en $\l[-2,-1\r[$;\puntaje{0.4}
-    \item 
-        sea estricta decreciente en $[-1,3]$.\puntaje{0.4}
-    \end{itemize}
-    
-\begin{respuesta}
-    Una posible respuesta es:
-    \begin{center}
-    \psset{algebraic,plotpoints=500}
-    \begin{pspicture}(-3.5,-3)(3.5,3.5)
-        \psgrid[gridcolor=gray,subgriddiv=0,griddots=5,gridlabels=0pt](-3,-3)(3,3)
-        \psaxes[labelFontSize=\scriptstyle,Dx=1,Dy=1]{->}(0,0)(-3.5,-3.5)(3.5,3.5)
-        
-        \psset{linewidth=1.5pt}
-        \psline(-3,1)(-2,3)
-        \psline(-2,3)(-1,-2)
-        \psbcurve(-1,3)(0,2)(3,1)
-        
-        \psdots*[dotsize=6pt](-2,3)(-1,-2)(0,2)(3,1)
-        \psdot[dotsize=6pt,dotstyle=o](-1,3)
-    \end{pspicture}
-    \end{center}
-\end{respuesta}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\item
-    Una empresa fabrica dos productos: zapatos y zapatillas. Por la infraestructura, la empresa solo puede fabricar $100$ productos en total. Por otro lado, la empresa tiene un gasto fijo semanal de \$$1600$, el costo de fabricar los zapatos es de \$$40$ el par y el de las zapatillas, \$$50$. Cada par de zapatos se vende en \$$60$ y el de zapatillas, \$$75$.
-    \begin{enumerate}[label=\textit{\alph*)}]
-    \item 
-        Modele la utilidad que obtiene la empresa en función de la cantidad de zapatos producidos.\puntaje{2.0}
-    \item
-        Si se producen $40$ zapatos, ¿cuál es la utilidad de la empresa?\puntaje{0.5}
-    \item
-        Si se desea tener una utilidad semanal de \$$300$, ¿cuántos pares de zapatos y zapatillas deben producirse?\puntaje{1.0}
-    \end{enumerate}
-    
-\begin{respuesta}\hspace{0pt}
-    \begin{enumerate}[label=\textit{\alph*)},listparindent= \parindent, leftmargin=*]
-    \item 
-        Para el modelamiento, consideremos lo siguiente:
-        \paragraph{Variables:}
-        \begin{itemize}
-        \item
-            $x$: cantidad de zapatos que la empresa produce.
-        \item
-            $y$: cantidad de zapatillas que la empresa produce.
-        \item
-            $U(x)$: utilidad que obtiene la empresa en función de la cantidad de zapatos producidos.
-        \end{itemize}
-        \paragraph{Planteamiento:} Tenemos que el ingreso por zapatos y zapatillas es:
-        \[
-            60x + 75y,
-        \]
-        respectivamente; por otro lado, los gastos están dados por
-        \[
-            1600 + 40x + 50y,
-        \]
-        por lo tanto, la utilidad está dada por (recordando que solo se podrían fabricar un máximo de 100 zapatos):
-        \[
-            \funcion{U}{\l[0,100\r]}{\R}{x}{60x + 75y -(1600 + 40x + 50y)= 20 x + 25 y - 1600 .}
-        \]
-        Ahora, dado que solo se pueden producir 100 artículos, es necesario que
-        \[
-            x+y=100,
-        \]
-        de donde
-        \[
-            y = 100 - x,
-        \]
-        con esto, la función $U$ nos queda
-        \[
-            \funcion{U}{[0,100]}{\R}
-            {x}{20 x + 25 (100 - x) - 1600 = 900 - 5x.}
-        \]
-    \item
-        Evaluemos la función en $x = 40$:
-        \[
-            U(40) = 900 - 5(40)
-            = 700.
-        \]
-        Por lo tanto, la utilidad de la empresa si se producen $40$ zapato es de \$$700$.
-    \item
-        Buscamos $x$ tal que $U(x) = 300$, por lo tanto:
-        \begin{align*}
-        U(x) = 300 
-           &\qDimp 900 - 5x = 300 \\
-           &\qDimp 5x = -600 \\
-           &\qDimp x = -120.
-        \end{align*}
-        Pero $x$ no está en el dominio de la función, por lo tanto, no existe una cantidad de zapatos y zapatillas que se pueda producir que generen una utilidad de \$$300$.\qedhere
-    \end{enumerate}
-\end{respuesta}
-    
-
 \end{preguntas}
-\final
+
 
 
 \end{document}
