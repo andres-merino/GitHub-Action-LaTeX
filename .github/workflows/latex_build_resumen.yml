@@ -1,8 +1,7 @@
 name: Compile LaTeX documents
+
 on:
   push:
-    paths:
-      - '**/*.tex'
     branches:
       - main
 
@@ -11,30 +10,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-    - name: Identify changed files
-      id: changes
-      run: |
-        files=$(git diff --name-only HEAD^ HEAD || git diff --name-only HEAD)
-        echo "files=$(echo "$files" | grep '.tex' || echo '')" >> $GITHUB_ENV
+    - name: Get changed files
+      id: changed-files
+      uses: tj-actions/changed-files@v44
 
     - name: Compile LaTeX documents
-      if: env.files != ''
+      if: steps.changed-files.outputs.all_changed_files != ''
       uses: xu-cheng/latex-action@v3
       with:
-        root_file: ${{ env.files }}
+        root_file: ${{ steps.changed-files.outputs.all_changed_files }}
 
     - name: Move PDFs to folder
-      if: env.files != ''
+      if: steps.changed-files.outputs.all_changed_files != ''
       run: |
-        for file in ${{ env.files }}; do
-          pdf_file="${file%.tex}.pdf"
-          mv "$pdf_file" "$(dirname "$file")/"
+        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+          if [[ $file == *.tex ]]; then
+            pdf_file="${file%.tex}.pdf"
+            mv "$pdf_file" "$(dirname "$file")/"
+          fi
         done
 
     - name: Commit PDFs
-      if: env.files != ''
+      if: steps.changed-files.outputs.all_changed_files != ''
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
