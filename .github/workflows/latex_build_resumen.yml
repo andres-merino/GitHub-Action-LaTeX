@@ -24,16 +24,6 @@ jobs:
       with:
         root_file: ${{ steps.changed-files.outputs.all_changed_files }}
 
-    - name: Move PDFs to folder
-      if: steps.changed-files.outputs.all_changed_files != ''
-      run: |
-        for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-          if [[ $file == *.tex ]]; then
-            pdf_file="${file%.tex}.pdf"
-            mv "$pdf_file" "$(dirname "$file")/"
-          fi
-        done
-
     - name: Commit PDFs
       if: steps.changed-files.outputs.all_changed_files != ''
       run: |
