@@ -1,8 +1,8 @@
-name: Compile LaTeX document
+name: Compile LaTeX documents
 on:
   push:
     paths:
-      - 'Resumen/Resumen01.tex'
+      - '**/*.tex'
     branches:
       - main
 
@@ -12,19 +12,30 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      
-    - name: Compile LaTeX document
+
+    - name: Identify changed files
+      id: changes
+      run: echo "files=$(git diff --name-only HEAD^ HEAD | grep '.tex' || echo '')" >> $GITHUB_ENV
+
+    - name: Compile LaTeX documents
+      if: env.files != ''
       uses: xu-cheng/latex-action@v3
       with:
-        root_file: Resumen/Resumen01.tex
+        root_file: ${{ env.files }}
 
-    - name: Move PDF to folder
-      run: mv Resumen01.pdf Resumen/
+    - name: Move PDFs to folder
+      if: env.files != ''
+      run: |
+        for file in ${{ env.files }}; do
+          pdf_file="${file%.tex}.pdf"
+          mv "$pdf_file" "$(dirname "$file")/"
+        done
 
-    - name: Commit PDF
+    - name: Commit PDFs
+      if: env.files != ''
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -f "Resumen/Resumen01.pdf"
-        git commit -m "chore: se agrega el PDF compilado ♻️" || echo "No changes to commit"
+        git add -f **/*.pdf
+        git commit -m "chore: se agregan los PDFs compilados ♻️" || echo "No changes to commit"
         git push
