@@ -15,7 +15,9 @@ jobs:
 
     - name: Identify changed files
       id: changes
-      run: echo "files=$(git diff --name-only HEAD^ HEAD | grep '.tex' || echo '')" >> $GITHUB_ENV
+      run: |
+        files=$(git diff --name-only HEAD^ HEAD || git diff --name-only HEAD)
+        echo "files=$(echo "$files" | grep '.tex' || echo '')" >> $GITHUB_ENV
 
     - name: Compile LaTeX documents
       if: env.files != ''
