@@ -52,12 +52,20 @@ jobs:
           fi
         done
 
-    - name: Commit PDFs y XMLs
+    - name: Commit PDFs
       if: steps.changed-files.outputs.all_changed_files != ''
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -f **/*.xml
         git add -f **/*.pdf
         git commit -m "chore: se agregan los PDFs compilados ♻️" || echo "No changes to commit"
+        git push
+
+    - name: Commit XMLs
+      if: steps.changed-files.outputs.all_changed_files != '' && find . -name '*.xml' | grep -q .
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -f **/*.xml
+        git commit -m "chore: se agregan los XMLs compilados ♻️" || echo "No changes to commit"
         git push
