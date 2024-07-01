@@ -29,11 +29,22 @@ jobs:
       with:
         root_file: ${{ steps.tex-files.outputs.tex_files }}
 
+    - name: Move PDFs to original .tex directories
+      if: steps.tex-files.outputs.tex_files != ''
+      run: |
+        for tex_file in ${{ steps.tex-files.outputs.tex_files }}; do
+          pdf_file="${tex_file%.tex}.pdf"
+          if [ -f "$pdf_file" ]; then
+            target_dir=$(dirname "$tex_file")
+            mv "$pdf_file" "$target_dir/"
+          fi
+        done
+
     - name: Commit PDFs
       if: steps.changed-files.outputs.all_changed_files != ''
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add -f *.pdf
+        git add -f **/*.pdf
         git commit -m "chore: se agregan los PDFs compilados ♻️" || echo "No changes to commit"
         git push
