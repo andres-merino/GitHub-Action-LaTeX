@@ -21,13 +21,15 @@ jobs:
     - name: Filter .tex files
       id: tex-files
       run: |
-        echo "::set-output name=tex_files::$(echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n' | grep '\.tex' || echo '')"
+        tex_files=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep '\.tex' || echo '')
+        echo "TEX_FILES=$tex_files" >> $GITHUB_ENV
+        echo "Filtered .tex files: $tex_files"
 
     - name: Compile LaTeX documents
-      if: steps.tex-files.outputs.tex_files != ''
+      if: env.TEX_FILES != ''
       uses: xu-cheng/latex-action@v3
       with:
-        root_file: ${{ steps.tex-files.outputs.tex_files }}
+        root_file: ${{ env.TEX_FILES }}
 
     - name: Commit PDFs
       if: steps.changed-files.outputs.all_changed_files != ''
