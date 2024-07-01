@@ -26,9 +26,11 @@ jobs:
 
     - name: Compile LaTeX documents
       if: env.TEX_FILES != ''
-      uses: xu-cheng/latex-action@v3
-      with:
-        root_file: ${{ env.TEX_FILES }}
+      run: |
+        for file in ${{ env.TEX_FILES }}; do
+          echo "Compiling $file"
+          xu-cheng/latex-action@v3 --root_file="$file"
+        done
 
     - name: Commit PDFs
       if: steps.changed-files.outputs.all_changed_files != ''
