@@ -21,7 +21,7 @@ jobs:
     - name: Filter .tex files
       id: tex-files
       run: |
-        echo "::set-output name=tex_files::$(echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' ' ' | grep '\.tex' || echo '')"
+        echo "::set-output name=tex_files::$(echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n' | grep '\.tex' | xargs || echo '')"
 
     - name: Compile LaTeX documents
       if: steps.tex-files.outputs.tex_files != ''
