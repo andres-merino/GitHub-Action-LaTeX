@@ -33,9 +33,9 @@ jobs:
       if: steps.tex-files.outputs.tex_files != ''
       run: |
         for tex_file in ${{ steps.tex-files.outputs.tex_files }}; do
-          pdf_file="${tex_file%.tex}.pdf"
+          pdf_file=$(basename "${tex_file%.tex}.pdf")
+          target_dir=$(dirname "$tex_file")
           if [ -f "$pdf_file" ]; then
-            target_dir=$(dirname "$tex_file")
             mv "$pdf_file" "$target_dir/"
           fi
         done
