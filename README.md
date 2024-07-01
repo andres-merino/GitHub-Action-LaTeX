@@ -16,6 +16,12 @@
     <a href="https://github.com/andres-merino/GitHub-Action-LaTeX/issues">Reportar un Problema</a>
     ·
     <a href="https://github.com/andres-merino/GitHub-Action-LaTeX/issues">Solicitar cambio</a>
+    <br />
+    Abrir en 
+    <br />
+    <a href="https://www.overleaf.com/read/xmzwtxnqskkm#dc2962">
+    <img src="https://img.shields.io/badge/Overleaf-47A141?logo=overleaf&logoColor=fff&style=for-the-badge" alt="Overleaf Badge">
+    </a>
   </p>
 </div>
 
@@ -63,7 +69,7 @@ El script ha sido probado en un entorno Ubuntu utilizando GitHub Actions y LaTeX
 
 ## Licencia
 
-Distribuido bajo la licencia Creative Commons Attribution-ShareAlike 4.0 International. 
+Distribuido bajo la licencia MIT. 
 
 [![MIT License][license-shield]][license-url]
 
