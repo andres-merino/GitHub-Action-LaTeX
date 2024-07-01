@@ -18,19 +18,16 @@ jobs:
       id: changed-files
       uses: tj-actions/changed-files@v44
 
-    - name: Filter .tex files
+- name: Filter .tex files
       id: tex-files
       run: |
-        tex_files=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep '\.tex' || echo '')
-        echo "TEX_FILES=$tex_files" >> $GITHUB_ENV
+        echo "::set-output name=tex_files::$(echo ${{ steps.changed-files.outputs.all_changed_files }} | tr ' ' '\n' | grep '\.tex' || echo '')"
 
     - name: Compile LaTeX documents
-      if: env.TEX_FILES != ''
-      run: |
-        for file in ${{ env.TEX_FILES }}; do
-          echo "Compiling $file"
-          xu-cheng/latex-action@v3 --root_file="$file"
-        done
+      if: steps.tex-files.outputs.tex_files != ''
+      uses: xu-cheng/latex-action@v3
+      with:
+        root_file: ${{ steps.tex-files.outputs.tex_files }}
 
     - name: Commit PDFs
       if: steps.changed-files.outputs.all_changed_files != ''
