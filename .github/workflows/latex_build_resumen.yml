@@ -23,7 +23,6 @@ jobs:
       run: |
         tex_files=$(echo "${{ steps.changed-files.outputs.all_changed_files }}" | tr ' ' '\n' | grep '\.tex' || echo '')
         echo "TEX_FILES=$tex_files" >> $GITHUB_ENV
-        echo "Filtered .tex files: $tex_files"
 
     - name: Compile LaTeX documents
       if: env.TEX_FILES != ''
